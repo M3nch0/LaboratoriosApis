@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    
+    <div class="controls">
+        <button onclick="fetchUsers(1)">Página 1</button>
+        <button onclick="fetchUsers(2)">Página 2</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Avatar</th>
+            </tr>
+        </thead>
+        <tbody id="user-table">
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
