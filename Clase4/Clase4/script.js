@@ -1,13 +1,16 @@
+let allUsers = []; // Guardará todos los usuarios
+ 
 // Función para obtener los usuarios desde la API
-async function fetchUsers(page) {   // page --> se lo pasa como parametro al url
+async function fetchUsers(page) {
     const API_URL = `https://reqres.in/api/users?page=${page}`;
-
+ 
     try {
         const response = await fetch(API_URL);
-        const data = await response.json();    // AWAIT --> espera a que la respuesta llegue 
-        
+        const data = await response.json();
+ 
         if (data.data) {
-            displayUsers(data.data); // Llamamos a la función para mostrar los usuarios
+            allUsers = data.data; // Guardamos los usuarios en la variable global
+            displayUsers(allUsers); // Mostramos los usuarios
         } else {
             console.error("No se encontraron usuarios en la respuesta.");
         }
@@ -15,14 +18,14 @@ async function fetchUsers(page) {   // page --> se lo pasa como parametro al url
         console.error("Error al obtener los datos:", error);
     }
 }
-
+ 
 // Función para mostrar los usuarios en la tabla
 function displayUsers(users) {
     const tableBody = document.getElementById("user-table");
     tableBody.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
-
+ 
     users.forEach(user => {
-        const row = document.createElement("tr");  //agrega una fila por cada usuario
+        const row = document.createElement("tr");
         row.innerHTML = `
             <td>${user.id}</td>
             <td>${user.first_name}</td>
@@ -33,7 +36,18 @@ function displayUsers(users) {
         tableBody.appendChild(row);
     });
 }
-
-// Cargar usuarios de la página 1 por defecto al iniciar
-fetchUsers(1);    // apenas se abre la pagina, se muestra la pagina 1 de usuarios automaticamente 
-
+ 
+// Función para filtrar usuarios por nombre
+function filterUsers() {
+    const searchText = document.getElementById("searchInput").value.toLowerCase();
+   
+    const filteredUsers = allUsers.filter(user =>
+        user.first_name.toLowerCase().includes(searchText)
+    );
+ 
+    displayUsers(filteredUsers);
+}
+ 
+// Cargar usuarios de la página 1 al iniciar
+fetchUsers(1);
+ 

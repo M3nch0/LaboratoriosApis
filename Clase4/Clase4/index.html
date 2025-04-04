@@ -8,13 +8,15 @@
 </head>
 <body>
     <h1>Lista de Usuarios</h1>
-    
+ 
+    <input type="text" id="searchInput" placeholder="Buscar por nombre..." oninput="filterUsers()">
+   
     <div class="controls">
         <button onclick="fetchUsers(1)">Página 1</button>
         <button onclick="fetchUsers(2)">Página 2</button>
     </div>
-
-    <table>
+ 
+    <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -25,9 +27,10 @@
             </tr>
         </thead>
         <tbody id="user-table">
+           
         </tbody>
     </table>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>
